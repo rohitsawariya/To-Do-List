@@ -1,14 +1,10 @@
-@media (max-width: 550px) {
-    .set {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    .closeness{
+      margin: 12px 1px 1px 1px;
+      padding: -20px 0px -20px 0px;
+      width: 180px;
+    }  
+    .closs{
+      margin: 12px 1px 1px 1px;
+      padding: -20px 0px -20px 0px;
+      /* width: 180px; */
     }
-    /* .closeness{
-      /* margin: 1px; */
-      /* border: 5px solid yellow; */
-      /* padding: -20px 0px -20px 0px; */
-    /* }  */
-
-  }

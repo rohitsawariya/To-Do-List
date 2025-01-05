@@ -8,19 +8,21 @@ function ItemList() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/tasks');
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
         const data = await response.json();
         
-        console.log('Fetched tasks:', data);
+        // console.log('Fetched tasks:', data);
   
         if (response.ok) {
-          setTodoList(data.tasks); 
+          setTodoList(data); 
+          console.log("----", todoList);
+          
         } else {
           alert(data.error || 'Error fetching tasks');
         }
       } catch (error) {
         console.error('Error fetching tasks:', error);
-        alert('Error fetching tasks');
+        // alert('Error fetching tasks');
       }
     };
   
@@ -28,39 +30,16 @@ function ItemList() {
   }, []);
 
 
-  const deleteTask = async (id) => {
-    console.log(`Attempting to delete task with ID: ${id}`);
-    try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        method: 'DELETE',
-      });
-  
-      if (response.ok) {
-        console.log('Task deleted successfully:', id);
-        setTodoList((prevList) => prevList.filter((task) => task._id !== id));
-        alert('Task deleted successfully');
-      } else {
-        const errorData = await response.json();
-        console.error('Error response:', errorData);
-        alert('Error deleting task');
-      }
-    } catch (error) {
-      console.error('Error deleting task:', error);
-      alert('Error deleting task');
-    }
-  };
-  
-
   return (
     <div>
       {todoList.length > 0 ? (
         todoList.map((todo) => (
           <Items
-            key={todo._id}
-            todoId={todo._id}
-            todoName={todo.name}
-            todoDescription={todo.description}
-            onDelete={() => deleteTask(todo._id)} 
+            key={todo.id}
+            todoId={todo.id}
+            todoUserId={todo.userId}
+            todoTitle={todo.title}
+            todoStatus={todo.completed} 
           />
         ))
       ) : (
